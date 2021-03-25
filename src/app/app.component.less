@@ -1,0 +1,50 @@
+@link-color: #fff;
+@link-backgroundcolor: #428bca;
+@link-backgroundcolor-hover: #184368;
+
+h1 {
+    margin: 50px;
+}
+
+nav {
+    padding: 0;
+    margin: auto;
+    max-width: 1000px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+a {
+    color: @link-color;
+    background-color: @link-backgroundcolor;
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    min-width: 70 px;
+    margin: .5rem auto;
+    box-sizing: border-box;
+    
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+
+@media (min-width: 600px) {
+    a {
+      width: 18%;
+      box-sizing: content-box;
+    }
+  }
+
+a:hover{
+    background-color: @link-backgroundcolor-hover;
+}
