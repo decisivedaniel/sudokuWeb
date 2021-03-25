@@ -7,7 +7,9 @@ Flow:
 - user page??
 
 Process:
-- Get flow
+- ~~Get flow~~
+- Make it pretty
+- Dark mode
 - get grid functioning
 - back with hardcoded data 
 - generating new grids dynamically
