@@ -1,1 +1,8 @@
 <p>sudoku works!</p>
+<div>
+    <div class="inputRow" *ngFor="let row of cells">
+        <div class="inputCell" *ngFor="let cell of row">
+            <input maxlength="1" [(ngModel)]="cell.displayNumber" [readonly]="cell.isInitial">
+        </div>
+    </div>
+</div>
