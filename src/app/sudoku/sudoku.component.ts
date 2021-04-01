@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms'
 
 import { Cell } from '../cell';
 import { SudokuService } from '../sudoku.service'; 
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-sudoku',
@@ -10,9 +12,20 @@ import { SudokuService } from '../sudoku.service';
 })
 export class SudokuComponent implements OnInit {
 
-  cells: Cell [][] = [];
+  //cells: Cell [][] = [];
+  sudokuForm : FormGroup = new FormGroup({});
+  currentRow : FormArray = new FormArray([]);
 
-  constructor(private sudokuService: SudokuService) { }
+  get rows(): FormArray {
+    this.currentRow = this.sudokuForm.get('rows') as FormArray
+    return this.currentRow;
+  }
+
+  get cells(): FormArray {
+    return this.currentRow.get('cells') as FormArray;
+  } 
+
+  constructor(private sudokuService: SudokuService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.getCells();
@@ -20,7 +33,34 @@ export class SudokuComponent implements OnInit {
 
   getCells(): void {
     this.sudokuService.getCells()
-      .subscribe(cells => this.cells = cells);
+      .subscribe(grid => this.makeForm(grid));
+  }
+
+  makeForm(grid: Cell[][]) : void {
+    this.sudokuForm = this.formBuilder.group({
+      rows: this.makeGrid(grid)
+    });
+  }
+
+  makeGrid(grid: Cell[][]) : FormArray {
+    const rowArray = grid.map(row => { return this.makeRowGroup(row);});
+    return this.formBuilder.array(rowArray);
+
+  }
+
+  makeRowGroup(row: Cell[]) : FormGroup {
+    return this.formBuilder.group({
+      cells: this.makeRow(row)
+    })
+  }
+
+  makeRow(row : Cell[]) : FormArray {
+    const cellArray = row.map(sudokuCell => { return this.formBuilder.group({
+        displayNumber: [sudokuCell.displayNumber],
+        isInitial: [sudokuCell.isInitial]
+      }); 
+    });
+    return this.formBuilder.array(cellArray);
   }
 
 }
