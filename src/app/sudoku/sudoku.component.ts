@@ -14,16 +14,10 @@ export class SudokuComponent implements OnInit {
 
   //cells: Cell [][] = [];
   sudokuForm : FormGroup = new FormGroup({});
-  currentRow : FormArray = new FormArray([]);
 
   get rows(): FormArray {
-    this.currentRow = this.sudokuForm.get('rows') as FormArray
-    return this.currentRow;
+    return this.sudokuForm.get('rows') as FormArray;
   }
-
-  get cells(): FormArray {
-    return this.currentRow.get('cells') as FormArray;
-  } 
 
   constructor(private sudokuService: SudokuService, private formBuilder: FormBuilder) { }
 
@@ -50,14 +44,14 @@ export class SudokuComponent implements OnInit {
 
   makeRowGroup(row: Cell[]) : FormGroup {
     return this.formBuilder.group({
-      cells: this.makeRow(row)
+      row: this.makeRow(row)
     })
   }
 
   makeRow(row : Cell[]) : FormArray {
     const cellArray = row.map(sudokuCell => { return this.formBuilder.group({
-        displayNumber: [sudokuCell.displayNumber],
-        isInitial: [sudokuCell.isInitial]
+        cell: [{value: sudokuCell.displayNumber, disabled: sudokuCell.isInitial }],
+        isInitial: []
       }); 
     });
     return this.formBuilder.array(cellArray);

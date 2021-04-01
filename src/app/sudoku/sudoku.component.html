@@ -3,23 +3,13 @@
 <form [formGroup]="sudokuForm">
     <div formArrayName="rows">
         <div [formGroupName]="i" *ngFor="let row of rows.controls; let i=index">
-            <p>test</p>
-             <ng-container  formArrayName="cells">
-                <ng-container *ngFor="let sudokuCell of cells.controls; let j=index" [formGroupName]="j">
-                    <p>interal</p>
+             <ng-container  formArrayName="row">
+                <ng-container *ngFor="let sudokuCell of row.get('row')!.value; let j=index" [formGroupName]="j">
+                    <input formControlName="cell" >
                 </ng-container>
             </ng-container>            
         </div>
     </div>
 </form>
-
-
-<!-- <div formArrayName="rowArray" *ngFor="let row of getRow.controls; let i=index">
-    <div [formArrayName]="i">
-        <ng-container formArrayName="row" *ngFor="let cell of row.controls; let j=index"> 
-            <input [formControl]="cell" [readonly]="cell.isInitial" >
-        </ng-container> 
-    </div>
-</div> -->
 
 
