@@ -1,19 +1,9 @@
 Working on a web sudoku application
 
-Flow:
-- Main page with options
-- Sudoku puzzle page
-- Result page if won
-- user page??
+Sudoku board will be generated with 
+-reactive forms and validated with custom rules
+-data will be created dynamically using a unit tested service
 
-Process:
-- ~~Get flow~~
-- Make it pretty
-- Dark mode
-- get grid functioning
-- back with hardcoded data 
-- generating new grids dynamically
-- varying difficulty of grids
-- updating grid generation to better design
+Process now tracked by GitHub issues
 
 
