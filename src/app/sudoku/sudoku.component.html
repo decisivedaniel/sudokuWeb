@@ -1,15 +1,15 @@
 <p>sudoku works!</p>
 
-<form [formGroup]="sudokuForm">
-    <div formArrayName="rows">
-        <div [formGroupName]="i" *ngFor="let row of rows.controls; let i=index">
+<form class="grid" [formGroup]="sudokuForm">
+    <ng-container formArrayName="rows">
+        <div [ngClass]="{'row': true, 'horizontalGap': i % 3 === 0 && i > 0}" [formGroupName]="i" *ngFor="let row of rows.controls; let i=index">
              <ng-container  formArrayName="row">
-                <ng-container *ngFor="let sudokuCell of row.get('row')!.value; let j=index" [formGroupName]="j">
-                    <input formControlName="cell" >
-                </ng-container>
+                <div [ngClass]="{'cell': true, 'verticalGap': j % 3 ===0 && j > 0}" *ngFor="let sudokuCell of row.get('row')!.value; let j=index" [formGroupName]="j">
+                    <input class="inputCell" formControlName="cell" >
+                </div>
             </ng-container>            
         </div>
-    </div>
+    </ng-container>
 </form>
 
 

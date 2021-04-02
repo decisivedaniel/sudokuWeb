@@ -1,0 +1,37 @@
+@width: 25px;
+@height: @width;
+@paddingGaps:6px;
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    orientation: landscape;
+    align-items: center;
+    justify-content: center;
+}
+
+.cell{
+    text-align: center;
+    margin: 5px;
+}
+
+.verticalGap{
+    padding-left: @paddingGaps;
+}
+
+.horizontalGap{
+    padding-top: @paddingGaps;
+}
+
+.inputCell {
+    text-align: center;
+    width: @width;
+    height: @height;
+}
