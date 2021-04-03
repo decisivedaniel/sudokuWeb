@@ -1,0 +1,29 @@
+@width: 25px;
+@height: @width;
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 5px;
+    background-color: #dadada;
+    align-items:center;
+    
+}
+
+.section {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: white;
+    align-items: center;
+}
+
+.cell{
+    text-align: center;
+    margin: 5px;
+}
+
+.inputCell {
+    text-align: center;
+    width: @width;
+    height: @height;
+}
