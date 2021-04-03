@@ -1,33 +1,25 @@
 @width: 25px;
 @height: @width;
-@paddingGaps:6px;
 
 .grid {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 5px;
+    background-color: #dadada;
     align-items:center;
-    justify-content: center;
+    
 }
 
-.row {
-    display: flex;
-    orientation: landscape;
+.section {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: white;
     align-items: center;
-    justify-content: center;
 }
 
 .cell{
     text-align: center;
     margin: 5px;
-}
-
-.verticalGap{
-    padding-left: @paddingGaps;
-}
-
-.horizontalGap{
-    padding-top: @paddingGaps;
 }
 
 .inputCell {

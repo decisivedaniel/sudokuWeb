@@ -12,11 +12,10 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class SudokuComponent implements OnInit {
 
-  //cells: Cell [][] = [];
   sudokuForm : FormGroup = new FormGroup({});
 
-  get rows(): FormArray {
-    return this.sudokuForm.get('rows') as FormArray;
+  get sections(): FormArray {
+    return this.sudokuForm.get('sections') as FormArray;
   }
 
   constructor(private sudokuService: SudokuService, private formBuilder: FormBuilder) { }
@@ -32,24 +31,24 @@ export class SudokuComponent implements OnInit {
 
   makeForm(grid: Cell[][]) : void {
     this.sudokuForm = this.formBuilder.group({
-      rows: this.makeGrid(grid)
+      sections: this.makeGrid(grid)
     });
   }
 
   makeGrid(grid: Cell[][]) : FormArray {
-    const rowArray = grid.map(row => { return this.makeRowGroup(row);});
-    return this.formBuilder.array(rowArray);
+    const sectionArray = grid.map(section => { return this.makeSectionGroup(section);});
+    return this.formBuilder.array(sectionArray);
 
   }
 
-  makeRowGroup(row: Cell[]) : FormGroup {
+  makeSectionGroup(section: Cell[]) : FormGroup {
     return this.formBuilder.group({
-      row: this.makeRow(row)
+      section: this.makeSection(section)
     })
   }
 
-  makeRow(row : Cell[]) : FormArray {
-    const cellArray = row.map(sudokuCell => { return this.formBuilder.group({
+  makeSection(section : Cell[]) : FormArray {
+    const cellArray = section.map(sudokuCell => { return this.formBuilder.group({
         cell: [{value: sudokuCell.displayNumber, disabled: sudokuCell.isInitial }],
         isInitial: []
       }); 
