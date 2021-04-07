@@ -29,29 +29,39 @@ function checkValidityOfGrid(grid : Cell[][]): void {
   issues += checkSections(grid);
   issues += checkRows(grid);
   issues += checkColumns(grid);
-  expect(issues).toEqual(0);  
+  expect(issues).withContext("valid sudoku grids will have zero repeats per grouping, found").toEqual(0);  
 };
 
 function checkSections(grid : Cell[][]) : number{
   var issues : number = 0;
-  for (var i = 0; i < 9; i++){
-    var sectionSum : number = 0;
-    for (var j = 0; j < 9; j++){
-      sectionSum += grid[i][j].correctNumber;
-    }
-    if (sectionSum != 45){
-      issues++;
-    }
+  for (var section of grid){
+    issues += checkUniqueNumber(section.map(cell => cell.correctNumber));
   }
   return issues
 };
 
 function checkRows(grid : Cell[][]) : number{
   var issues : number = 0;
+  //transform sections -> rows
+  
+  //run checkUniqueNumber
   return issues
 };
 
 function checkColumns(grid : Cell[][]) : number{
   var issues : number = 0;
+  //transform sections -> columns
+  
+  //run checkUniqueNumber
+  return issues;
+};
+
+function checkUniqueNumber(group : number[]) : number {
+  var issues : number = 0;
+  for (var check of group){
+    if(group.indexOf(check) != group.lastIndexOf(check)){
+      issues++;
+    }
+  }
   return issues;
 };
