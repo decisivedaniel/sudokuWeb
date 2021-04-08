@@ -16,7 +16,9 @@ fdescribe('SudokuService', () => {
   });
 
   it('should create a valid sudoku board', () => {
+    //Arrange
     var grid : Cell[][] = [];
+
     service.getCells().subscribe(
       returnGrid => {
         grid = returnGrid;
@@ -26,15 +28,16 @@ fdescribe('SudokuService', () => {
     let invalidRangeIssues : number = 0;
     let duplicateIssues  : number = 0;
 
+    //Act
     invalidRangeIssues += checkOutOfRange(grid);
 
     duplicateIssues += checkSections(grid);
     duplicateIssues += checkRows(grid);
     duplicateIssues += checkColumns(grid);
 
+    //Assert
     expect(invalidRangeIssues).withContext("valid numbers will be between 1-9, number of cells were out of range").toBe(0)
     expect(duplicateIssues).withContext("valid sudoku grids will have zero repeats per grouping, found").toBe(0);  
-
   });
 
 });
@@ -74,8 +77,8 @@ function checkColumns(grid : Cell[][]) : number{
   for (let section : number = 0; section < 9; section++){
     for (let cell : number = 0; cell < 9; cell++){
       //Need to convert 9 sections arrays into similar sized 9 columns arrays
-      let cellsNewSection : number = (((section % 3) + 3)+(cell % 3));
-      columnTransformedGrid[cellsNewSection].push(grid[section][cell].correctNumber);
+      let cellsNewColumn : number = (((section % 3) + 3)+(cell % 3));
+      columnTransformedGrid[cellsNewColumn].push(grid[section][cell].correctNumber);
     }
   }
   return checkUniqueNumber(columnTransformedGrid);
