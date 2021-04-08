@@ -16,27 +16,28 @@ fdescribe('SudokuService', () => {
   });
 
   it('should create a valid sudoku board', () => {
+    var grid : Cell[][] = [];
     service.getCells().subscribe(
-      grid => checkValidityOfGrid(grid)
-    )
+      returnGrid => {
+        grid = returnGrid;
+      }
+    );
+
+    let invalidRangeIssues : number = 0;
+    let duplicateIssues  : number = 0;
+
+    invalidRangeIssues += checkOutOfRange(grid);
+
+    duplicateIssues += checkSections(grid);
+    duplicateIssues += checkRows(grid);
+    duplicateIssues += checkColumns(grid);
+
+    expect(invalidRangeIssues).withContext("valid numbers will be between 1-9, number of cells were out of range").toBe(0)
+    expect(duplicateIssues).withContext("valid sudoku grids will have zero repeats per grouping, found").toBe(0);  
+
   });
 
-
 });
-
-function checkValidityOfGrid(grid : Cell[][]): void {
-  let invalidRangeIssues : number = 0;
-  let duplicateIssues  : number = 0;
-
-  invalidRangeIssues += checkOutOfRange(grid);
-
-  duplicateIssues += checkSections(grid);
-  duplicateIssues += checkRows(grid);
-  duplicateIssues += checkColumns(grid);
-
-  expect(invalidRangeIssues).withContext("valid numbers will be between 1-9, number of cells were out of range").toBe(0)
-  expect(duplicateIssues).withContext("valid sudoku grids will have zero repeats per grouping, found").toBe(0);  
-};
 
 function checkOutOfRange(grid : Cell[][]) : number{
   let issues : number = 0;
