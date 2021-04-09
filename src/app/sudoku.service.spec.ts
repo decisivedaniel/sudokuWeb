@@ -46,7 +46,7 @@ function checkOutOfRange(grid : Cell[][]) : number{
   let issues : number = 0;
   for (let group of grid){
     for (let check of group){
-      if(check.correctNumber < 1 || check.correctNumber > 9){
+      if(!Number.isInteger(check.correctNumber) || check.correctNumber < 1 || check.correctNumber > 9){
         issues++;
       }
     }
