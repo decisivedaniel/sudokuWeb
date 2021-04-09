@@ -1,7 +1,7 @@
-import { Cell } from './cell';
+import { ICell } from './cell';
 
 //temporary while setting up the generation code
-export const CELLS: Cell[][] = [
+export const CELLS: ICell[][] = [
     [{ displayNumber: 1, correctNumber: 1, isInitial: false }, { displayNumber: 2, correctNumber: 2, isInitial: true }, { displayNumber: 3, correctNumber: 3, isInitial: true }, { displayNumber: 4, correctNumber: 4, isInitial: true }, { displayNumber: 5, correctNumber: 5, isInitial: true }, { displayNumber: 6, correctNumber: 6, isInitial: true }, { displayNumber: 7, correctNumber: 7, isInitial: true }, { displayNumber: 8, correctNumber: 8, isInitial: true }, { displayNumber: 9, correctNumber: 9, isInitial: true }],
     [{ displayNumber: 1, correctNumber: 1, isInitial: false }, { displayNumber: 2, correctNumber: 2, isInitial: true }, { displayNumber: 3, correctNumber: 3, isInitial: true }, { displayNumber: 4, correctNumber: 4, isInitial: true }, { displayNumber: 5, correctNumber: 5, isInitial: true }, { displayNumber: 6, correctNumber: 6, isInitial: true }, { displayNumber: 7, correctNumber: 7, isInitial: true }, { displayNumber: 8, correctNumber: 8, isInitial: true }, { displayNumber: 9, correctNumber: 9, isInitial: true }],
     [{ displayNumber: 1, correctNumber: 1, isInitial: false }, { displayNumber: 2, correctNumber: 2, isInitial: true }, { displayNumber: 3, correctNumber: 3, isInitial: true }, { displayNumber: 4, correctNumber: 4, isInitial: true }, { displayNumber: 5, correctNumber: 5, isInitial: true }, { displayNumber: 6, correctNumber: 6, isInitial: true }, { displayNumber: 7, correctNumber: 7, isInitial: true }, { displayNumber: 8, correctNumber: 8, isInitial: true }, { displayNumber: 9, correctNumber: 9, isInitial: true }],
