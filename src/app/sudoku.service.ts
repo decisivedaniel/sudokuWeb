@@ -16,7 +16,7 @@ export class SudokuService {
     //let sectionGrid : number[][] = [[],[],[],[],[],[],[],[],[]];
     let rowGrid : number[][] = [[],[],[],[],[],[],[],[],[]];
     //let columnGrid : number[][] = [[],[],[],[],[],[],[],[],[]];
-    let cellSectionGrid : Cell[][] = [];
+    let cellSectionGrid : Cell[][] = [[],[],[],[],[],[],[],[],[]];
 
     //Sad generate a full 9*9 grid to prevent index out of bound errors
     for (let rowIndex : number = 0; rowIndex < 9; rowIndex++){
@@ -33,11 +33,20 @@ export class SudokuService {
     //let rowIndex = (((Math.floor(sectionIndex / 3)) * 3)+Math.floor(cellIndex / 3));
     //let columnIndex = (((sectionIndex % 3) * 3)+(cellIndex % 3));
 
+    for (let rowIndex : number = 0; rowIndex < 9; rowIndex++){
+      for (let columnIndex : number = 0; columnIndex < 9; columnIndex++){
+        let sectionIndex = (((Math.floor(rowIndex / 3)) * 3)+Math.floor(columnIndex / 3));
+        cellSectionGrid[sectionIndex].push(new Cell(rowGrid[rowIndex][columnIndex]));
+      }
+    }
+
     return of(cellSectionGrid);
   }
 }
 
 function fillGrid(row : number, col : number, grid : number[][]) : number[][]{
+  console.log("row: " + row + " column: " + col);
+  
   //Check if col is at the end of grid
   if(col >= 9 && row < (9-1) ){
     row += 1;
@@ -53,19 +62,32 @@ function fillGrid(row : number, col : number, grid : number[][]) : number[][]{
   
   //Check if the grid is finished
   if(row >= 9 && col >= 9){
+    console.log("Accomplished Goal");
     return grid;
   }
 
-  let selectedNumber = calculateCorrectNumber(row, col, grid);
-  if(Number.isInteger(selectedNumber)){
+  let unusedNumbers = findUsedNumbers(row, col, grid);
+  while (unusedNumbers.length > 0){
+    let selectedNumber = unusedNumbers[Math.floor(Math.random()*unusedNumbers.length)]
     grid[row][col] = selectedNumber;
-    fillGrid(row, col+1, grid);
+    try{
+      console.log("Trying: " + selectedNumber);
+      fillGrid(row, col+1, grid);
+      return grid;
+    }
+    catch (error){
+      console.error(error);
+      grid[row][col] = -1;
+      unusedNumbers = unusedNumbers.filter(function(value, index, arr){
+        return value != selectedNumber;
+      });
+    }
   }
-  fillGrid(row, (col-1), grid);
-  return grid;
+
+  throw new Error("number not found");
 }
 
-function calculateCorrectNumber(rowIndex : number, columnIndex : number, rowGrid: number[][]) : number{
+function findUsedNumbers(rowIndex : number, columnIndex : number, rowGrid: number[][]) : number[] {
   let validNumbers : number[] = [1,2,3,4,5,6,7,8,9];
 
   //check section
@@ -73,7 +95,6 @@ function calculateCorrectNumber(rowIndex : number, columnIndex : number, rowGrid
 
   //console.log("valid Numbers: " + validNumbers);
 
-  
   //let rowIndex = (((Math.floor(sectionIndex / 3)) * 3)+Math.floor(cellIndex / 3));
   //let columnIndex = (((sectionIndex % 3) * 3)+(cellIndex % 3));
 
@@ -86,13 +107,13 @@ function calculateCorrectNumber(rowIndex : number, columnIndex : number, rowGrid
   //console.log("valid Numbers: " + validNumbers);
 
   //With only the valid numbers remaining, find the next one at random
-  let selectedNumber = validNumbers[Math.floor(Math.random()*validNumbers.length)];
-  if(!Number.isInteger(selectedNumber)){
-    console.error(selectedNumber);
+  //let selectedNumber = validNumbers[Math.floor(Math.random()*validNumbers.length)];
+  //if(!Number.isInteger(selectedNumber)){
+  //  console.error(selectedNumber);
     //selectedNumber = -1;
-  }
+  //}
 
-  return selectedNumber;
+  return validNumbers;
 }
 
 function removeUsedNumberSection(validNumbers : number[], rowStart : number, colStart : number, usedNumbers : number[][]) : number[] {
