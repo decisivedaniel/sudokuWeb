@@ -53,27 +53,27 @@ function fillGrid(row : number, col : number, grid : number[][]) : number[][]{
   
   //Check if the grid is finished
   if(row > 8){
-    console.log("Accomplished Goal");
     return grid;
   }
-
-  console.log("row: " + row + " column: " + col);
 
   let unusedNumbers = findUsedNumbers(row, col, grid);
   while (unusedNumbers.length > 0){
     let selectedNumber = unusedNumbers[Math.floor(Math.random() * unusedNumbers.length)]
     grid[row][col] = selectedNumber;
     try{
-      console.log("Trying: " + selectedNumber);
       fillGrid(row, col+1, grid);
       return grid;
     }
     catch (error){
-      console.error(error);
-      grid[row][col] = -1;
-      unusedNumbers = unusedNumbers.filter(function(value){
+      if (error.message === "number not found")
+      {
+        console.error(error);
+        grid[row][col] = -1;
+        unusedNumbers = unusedNumbers.filter(function(value){
         return value != selectedNumber;
-      });
+        });
+      }
+      
     }
   }
 
