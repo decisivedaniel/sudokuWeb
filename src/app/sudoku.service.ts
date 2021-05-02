@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { Cell } from './cell';
-import { removeSummaryDuplicates } from '@angular/compiler';
-
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +11,7 @@ export class SudokuService {
   constructor() { }
 
   getCells(): Observable<Cell[][]> {
-    //let sectionGrid : number[][] = [[],[],[],[],[],[],[],[],[]];
-    let rowGrid : number[][] = [[],[],[],[],[],[],[],[],[]];
-    //let columnGrid : number[][] = [[],[],[],[],[],[],[],[],[]];
+    let rowGrid : number[][] = [];
     let cellSectionGrid : Cell[][] = [[],[],[],[],[],[],[],[],[]];
 
     //Sad generate a full 9*9 grid to prevent index out of bound errors
@@ -30,9 +26,6 @@ export class SudokuService {
     rowGrid = fillGrid(0,0, rowGrid);
 
     //Convert row grid => section grid
-    //let rowIndex = (((Math.floor(sectionIndex / 3)) * 3)+Math.floor(cellIndex / 3));
-    //let columnIndex = (((sectionIndex % 3) * 3)+(cellIndex % 3));
-
     for (let rowIndex : number = 0; rowIndex < 9; rowIndex++){
       for (let columnIndex : number = 0; columnIndex < 9; columnIndex++){
         let sectionIndex = (((Math.floor(rowIndex / 3)) * 3)+Math.floor(columnIndex / 3));
@@ -45,10 +38,9 @@ export class SudokuService {
 }
 
 function fillGrid(row : number, col : number, grid : number[][]) : number[][]{
-  console.log("row: " + row + " column: " + col);
   
   //Check if col is at the end of grid
-  if(col >= 9 && row < (9-1) ){
+  if(col > 8){
     row += 1;
     col = 0;
   }
@@ -57,18 +49,19 @@ function fillGrid(row : number, col : number, grid : number[][]) : number[][]{
   if(col < 0 && row > 0){
     row -= 1;
     col = 8;
-
   }
   
   //Check if the grid is finished
-  if(row >= 9 && col >= 9){
+  if(row > 8){
     console.log("Accomplished Goal");
     return grid;
   }
 
+  console.log("row: " + row + " column: " + col);
+
   let unusedNumbers = findUsedNumbers(row, col, grid);
   while (unusedNumbers.length > 0){
-    let selectedNumber = unusedNumbers[Math.floor(Math.random()*unusedNumbers.length)]
+    let selectedNumber = unusedNumbers[Math.floor(Math.random() * unusedNumbers.length)]
     grid[row][col] = selectedNumber;
     try{
       console.log("Trying: " + selectedNumber);
@@ -78,7 +71,7 @@ function fillGrid(row : number, col : number, grid : number[][]) : number[][]{
     catch (error){
       console.error(error);
       grid[row][col] = -1;
-      unusedNumbers = unusedNumbers.filter(function(value, index, arr){
+      unusedNumbers = unusedNumbers.filter(function(value){
         return value != selectedNumber;
       });
     }
@@ -93,25 +86,11 @@ function findUsedNumbers(rowIndex : number, columnIndex : number, rowGrid: numbe
   //check section
   validNumbers = removeUsedNumberSection(validNumbers, (rowIndex - (rowIndex % 3)), (columnIndex - (columnIndex % 3)), rowGrid);
 
-  //console.log("valid Numbers: " + validNumbers);
-
-  //let rowIndex = (((Math.floor(sectionIndex / 3)) * 3)+Math.floor(cellIndex / 3));
-  //let columnIndex = (((sectionIndex % 3) * 3)+(cellIndex % 3));
-
   //check row
   validNumbers = removeUsedNumberRow(rowIndex, validNumbers, rowGrid);
-  //console.log("valid Numbers: " + validNumbers);
 
   //check column
   validNumbers = removeUsedNumberColumn(columnIndex, validNumbers, rowGrid);
-  //console.log("valid Numbers: " + validNumbers);
-
-  //With only the valid numbers remaining, find the next one at random
-  //let selectedNumber = validNumbers[Math.floor(Math.random()*validNumbers.length)];
-  //if(!Number.isInteger(selectedNumber)){
-  //  console.error(selectedNumber);
-    //selectedNumber = -1;
-  //}
 
   return validNumbers;
 }
