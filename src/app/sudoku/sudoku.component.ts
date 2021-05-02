@@ -3,7 +3,6 @@ import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@ang
 
 import { Cell } from '../cell';
 import { SudokuService } from '../sudoku.service'; 
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-sudoku',
