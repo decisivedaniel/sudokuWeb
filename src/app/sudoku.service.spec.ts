@@ -77,7 +77,7 @@ function checkColumns(grid : Cell[][]) : number{
   for (let section : number = 0; section < 9; section++){
     for (let cell : number = 0; cell < 9; cell++){
       //Need to convert 9 sections arrays into similar sized 9 columns arrays
-      let cellsNewColumn : number = (((section % 3) + 3)+(cell % 3));
+      let cellsNewColumn : number = (((section % 3) * 3)+(cell % 3));
       columnTransformedGrid[cellsNewColumn].push(grid[section][cell].correctNumber);
     }
   }
