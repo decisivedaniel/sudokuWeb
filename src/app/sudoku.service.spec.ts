@@ -19,25 +19,22 @@ fdescribe('SudokuService', () => {
     //Arrange
     var grid : Cell[][] = [];
 
+    //Act
     service.getCells().subscribe(
       returnGrid => {
         grid = returnGrid;
       }
     );
 
-    let invalidRangeIssues : number = 0;
-    let duplicateIssues  : number = 0;
-
-    //Act
-    invalidRangeIssues += checkOutOfRange(grid);
-
-    duplicateIssues += checkSections(grid);
-    duplicateIssues += checkRows(grid);
-    duplicateIssues += checkColumns(grid);
-
     //Assert
-    expect(invalidRangeIssues).withContext("valid numbers will be between 1-9, number of cells were out of range").toBe(0)
-    expect(duplicateIssues).withContext("valid sudoku grids will have zero repeats per grouping, found").toBe(0);  
+    //Asserts for Correct Number
+    expect(checkOutOfRange(grid)).withContext("valid numbers will be between 1-9, number of cells were out of range").toBe(0)
+    expect(checkSections(grid)).withContext("valid sudoku grids will have zero repeats per section, found").toBe(0);  
+    expect(checkRows(grid)).withContext("valid sudoku grids will have zero repeats per row, found").toBe(0); 
+    expect(checkColumns(grid)).withContext("valid sudoku grids will have zero repeats per column, found").toBe(0); 
+
+    //Asserts for Masking
+    expect(checkMasking(grid)).withContext("isInitial masking ratio should be similar to expected ratio").toBeCloseTo(0.50, 1);
   });
 
 });
@@ -96,3 +93,25 @@ function checkUniqueNumber(grid : number[][]) : number {
   }
   return issues;
 };
+
+function checkMasking(grid: Cell[][]) : number {
+  let numOfCells : number = 0;
+  let numCellsMasked : number = 0;
+
+  //Loop through Grid and get the masked count
+  for(let section of grid){
+    for(let cell of section){
+      numOfCells++;
+      if(!cell.isInitial){
+        numCellsMasked++;
+      }
+    }
+  }
+
+  //check if cells are zero
+  if (!numOfCells){
+    throw new Error('zero cells in grid');
+  }
+  //Return the ratio of masked cells to total cells
+  return (numCellsMasked / numOfCells);
+}
