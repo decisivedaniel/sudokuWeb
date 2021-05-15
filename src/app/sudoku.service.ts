@@ -139,6 +139,5 @@ function CheckIsInitial(sectionIndex : number, cellIndex : number, CellGrid : Ce
     isInitial = CellGrid[8-sectionIndex][8-cellIndex].isInitial;
   }
 
-
   return isInitial;
 }
