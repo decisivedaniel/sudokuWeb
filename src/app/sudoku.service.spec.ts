@@ -18,6 +18,7 @@ fdescribe('SudokuService', () => {
   it('should create a valid sudoku board', () => {
     //Arrange
     var grid : Cell[][] = [];
+    var maskedRatio : number = 0;
 
     //Act
     service.getCells().subscribe(
@@ -34,7 +35,9 @@ fdescribe('SudokuService', () => {
     expect(checkColumns(grid)).withContext("valid sudoku grids will have zero repeats per column, found").toBe(0); 
 
     //Asserts for Masking
-    expect(checkMasking(grid)).withContext("isInitial masking ratio should be similar to expected ratio").toBeCloseTo(0.50, 1);
+    maskedRatio = checkMasking(grid);
+    expect(maskedRatio).withContext("isInitial masking ratio should be greater than").toBeGreaterThan(0.4);
+    expect(maskedRatio).withContext("isInitial masking ratio should be less than").toBeLessThan(0.7);
   });
 
 });

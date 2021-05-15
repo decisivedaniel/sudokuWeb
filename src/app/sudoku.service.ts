@@ -33,6 +33,14 @@ export class SudokuService {
       }
     }
 
+    //Mask cells to create challenge
+    //Doing this as a separate loop to enable sixth section to have all the information available to flip and reverse
+    for (let sectionIndex : number = 0; sectionIndex < 9; sectionIndex++){
+      for (let cellIndex : number = 0; cellIndex < 9; cellIndex++){
+        cellSectionGrid[sectionIndex][cellIndex].isInitial = CheckIsInitial(sectionIndex, cellIndex, cellSectionGrid)
+      }
+    }
+
     return of(cellSectionGrid);
   }
 }
@@ -117,4 +125,20 @@ function removeUsedNumberColumn(column : number, validNumbers : number[], curren
     validNumbers = validNumbers.filter(validNum => validNum != currentGrid[cellIndex][column]);
   }
   return validNumbers;
+}
+
+function CheckIsInitial(sectionIndex : number, cellIndex : number, CellGrid : Cell[][]) : boolean{
+  let isInitial : boolean = true;
+
+  //for the first 5 sections, math.random
+  if(sectionIndex < 5){
+    isInitial = Math.random() > 0.5;
+  }
+  //for the last 4 sections, missyeliot first four sections
+  else{
+    isInitial = CellGrid[8-sectionIndex][8-cellIndex].isInitial;
+  }
+
+
+  return isInitial;
 }

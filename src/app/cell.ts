@@ -1,11 +1,11 @@
 export interface ICell {
-    displayNumber: number;
+    displayNumber?: number;
     correctNumber: number;
     isInitial: boolean;
 }
 
 export class Cell implements ICell{
-    _displayNumber : number;
+    _displayNumber? : number;
     correctNumber : number;
     isInitial : boolean;
 
@@ -24,6 +24,5 @@ export class Cell implements ICell{
     constructor(correctNumber : number){
         this.correctNumber = correctNumber;
         this.isInitial = true;
-        this._displayNumber = correctNumber;
     }
 }
