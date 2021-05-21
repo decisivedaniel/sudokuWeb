@@ -1,6 +1,6 @@
 # Sudoku Game
 Complete sudoku application running entirely client side in your browser using Angular v.11  
-To play go to: [GitHub Pages Hosting](https://bo-shamo.github.io/sudokuWeb)
+To play go to: https://bo-shamo.github.io/sudokuWeb
 
 # Improvements
 Just open an issue and I will consider it.
