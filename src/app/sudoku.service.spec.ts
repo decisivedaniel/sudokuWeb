@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { SudokuService } from './sudoku.service';
 import { Cell } from './cell';
 
-fdescribe('SudokuService', () => {
+describe('SudokuService', () => {
   let service: SudokuService;
 
   beforeEach(() => {
