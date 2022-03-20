@@ -20,5 +20,5 @@ Just open an issue and I will consider it.
 # Deployment to Github Pages
 1. Pull the repository
 2. Install Node.js
-3. Build using Angular: `ng build --prod --output-path docs --base-href /sudokuWeb`
+3. Build using Angular: `ng build --prod --output-path docs --base-href /sudokuWeb/`
 4. In `/docs` copy `index.html` and rename the copy `404.html` for GitHub Pages
