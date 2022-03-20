@@ -1,5 +1,6 @@
 @width: 25px;
 @height: @width;
+@radius: 5px;
 
 .grid {
     display: grid;
@@ -7,14 +8,15 @@
     grid-gap: 5px;
     max-width: 450px;
     margin: auto;
-    background-color: #dadada;
+    background-color: --main-color;
     
 }
 
 .section {
+    background-color: #3f6c96;
+    border-radius: @radius;
     display: grid;
     grid-template-columns: auto auto auto;
-    background-color: white;
     align-items: center;
 }
 
@@ -24,9 +26,15 @@
 }
 
 .inputCell {
+    border-radius: @radius;
     text-align: center;
     width: @width;
     height: @height;
+    background-color: #76b2e7;
+}
+
+.inputCell:disabled{
+    background-color: #cddce9;
 }
 
 input.ng-invalid.ng-dirty {
