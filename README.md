@@ -2,6 +2,12 @@
 Complete sudoku application running entirely client side in your browser using Angular v.11  
 To play go to: https://bo-shamo.github.io/sudokuWeb
 
+# What I learned
+- Angular routing
+- Separation of angular components
+- Code based testing UI with angular forms 
+- How to deploy to github pages 
+
 # Improvements
 Just open an issue and I will consider it.
 
