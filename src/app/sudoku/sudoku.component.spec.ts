@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SudokuComponent } from './sudoku.component';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 
 describe('SudokuComponent', () => {
   let component: SudokuComponent;
@@ -10,7 +10,7 @@ describe('SudokuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ SudokuComponent ],
-      providers: [ FormBuilder ]
+      providers: [ UntypedFormBuilder ]
     })
     .compileComponents();
   });
