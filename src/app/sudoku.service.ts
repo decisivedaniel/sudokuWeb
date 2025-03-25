@@ -73,7 +73,7 @@ function fillGrid(row : number, col : number, grid : number[][]) : number[][]{
       return grid;
     }
     catch (error){
-      if (error.message === "number not found")
+      if ((error as Error).message === "number not found")
       {
         grid[row][col] = -1;
         unusedNumbers = unusedNumbers.filter(function(value){
