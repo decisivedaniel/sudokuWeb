@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, UntypedFormGroup, UntypedFormArray, Validators, UntypedFormBuilder } from '@angular/forms'
+import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms'
 
 import { Cell } from '../cell';
 import { SudokuService } from '../sudoku.service'; 
@@ -12,13 +12,13 @@ import { CheckValue } from '../../shared/checkValue.validator';
 })
 export class SudokuComponent implements OnInit {
 
-  sudokuForm : UntypedFormGroup = new UntypedFormGroup({});
+  sudokuForm : FormGroup = new FormGroup({});
 
-  get sections(): UntypedFormArray {
-    return this.sudokuForm.get('sections') as UntypedFormArray;
+  get sections(): FormArray {
+    return this.sudokuForm.get('sections') as FormArray;
   }
 
-  constructor(private sudokuService: SudokuService, private formBuilder: UntypedFormBuilder) { }
+  constructor(private sudokuService: SudokuService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.getCells();
@@ -35,19 +35,19 @@ export class SudokuComponent implements OnInit {
     });
   }
 
-  makeGrid(grid: Cell[][]) : UntypedFormArray {
+  makeGrid(grid: Cell[][]) : FormArray {
     const sectionArray = grid.map(section => { return this.makeSectionGroup(section);});
     return this.formBuilder.array(sectionArray);
 
   }
 
-  makeSectionGroup(section: Cell[]) : UntypedFormGroup {
+  makeSectionGroup(section: Cell[]) : FormGroup {
     return this.formBuilder.group({
       section: this.makeSection(section)
     })
   }
 
-  makeSection(section : Cell[]) : UntypedFormArray {
+  makeSection(section : Cell[]) : FormArray {
     const cellArray = section.map(sudokuCell => { return this.formBuilder.group({
         cell: [{value: sudokuCell.displayNumber, disabled: sudokuCell.isInitial }, [Validators.required, CheckValue(sudokuCell.correctNumber)]],
         isInitial: []
