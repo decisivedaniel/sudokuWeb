@@ -1,6 +1,9 @@
 # Sudoku Game
-Complete sudoku application running entirely client side in your browser using Angular v.11  
-To play go to: https://bo-shamo.github.io/sudokuWeb
+Complete sudoku application running entirely client side in your browser using Angular v.11 now updating to version 18.
+
+Version 11 work done under my old github account, new work is done under my new github account.
+
+To play go to: Re-implementing this with automatic flows
 
 # What I learned
 - Angular routing
@@ -14,8 +17,10 @@ Just open an issue and I will consider it.
 # Build Local
 1. Pull Repo
 2. Install Node.js
-3. Open Local copy in favorite ide (like Visual Studio Code)
-4. type `ng serve` into the terminal
+3. Install Angular/cli
+4. Open Local copy in favorite ide (like Visual Studio Code)
+5. Install needed packages with `npm install`
+6. Run `ng serve` into the terminal
 
 # Deployment to Github Pages
 1. Pull the repository
