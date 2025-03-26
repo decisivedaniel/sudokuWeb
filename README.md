@@ -10,6 +10,7 @@ To play go to: Re-implementing this with automatic flows
 - Separation of angular components
 - Code based testing UI with angular forms 
 - How to deploy to github pages 
+- Updating through many versions in Angular
 
 # Improvements
 Just open an issue and I will consider it.

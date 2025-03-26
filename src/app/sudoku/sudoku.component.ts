@@ -6,9 +6,10 @@ import { SudokuService } from '../sudoku.service';
 import { CheckValue } from '../../shared/checkValue.validator';
 
 @Component({
-  selector: 'app-sudoku',
-  templateUrl: './sudoku.component.html',
-  styleUrls: ['./sudoku.component.less']
+    selector: 'app-sudoku',
+    templateUrl: './sudoku.component.html',
+    styleUrls: ['./sudoku.component.less'],
+    standalone: false
 })
 export class SudokuComponent implements OnInit {
 
