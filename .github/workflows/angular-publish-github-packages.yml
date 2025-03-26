@@ -20,8 +20,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+        run: npm build
+
       - name: Test
-        run: npm test
+        run: ng test --no-watch --no-progress --browsers=ChromeHeadless
 
       - name: Deploy to Github Pages
         env:
