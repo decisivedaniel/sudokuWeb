@@ -4,11 +4,13 @@ Complete sudoku application running entirely client side in your browser using A
 Version 11 work done under my old github account, new work is done under my new github account.
 
 To play go to: Re-implementing this with automatic flows
+
 # What I learned
 - Angular routing
 - Separation of angular components
 - Code based testing UI with angular forms 
 - How to deploy to github pages 
+- Updating through many versions in Angular
 
 # Improvements
 Just open an issue and I will consider it.
