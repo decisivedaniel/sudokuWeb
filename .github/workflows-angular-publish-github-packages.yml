@@ -23,7 +23,7 @@ jobs:
       - name: Test
         run: npm test
 
-      -name: Deploy to Github Pages
+      - name: Deploy to Github Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run : |
