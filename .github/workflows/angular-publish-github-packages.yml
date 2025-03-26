@@ -23,7 +23,7 @@ jobs:
         run: npm build
 
       - name: Test
-        run: npm run ng test --no-watch --no-progress --browsers=ChromeHeadless
+        run: npm run test-headless
 
       - name: Deploy to Github Pages
         env:
