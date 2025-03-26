@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
-name: Node.js Package
+name: Node.js create release to github pages
 
 on:
   release:
@@ -27,4 +27,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run : |
-          npm run ng -- deploy --repo="https://github.com/decisivedaniel/sudokuWeb.git" --base-href=sudokuWeb --name=decisivedaniel
+          npm run ng -- deploy --repo="https://github.com/decisivedaniel/sudokuWeb.git" --base-href=sudokuWeb --name=decisivedaniel --email=decisivedaniel@proton.me
