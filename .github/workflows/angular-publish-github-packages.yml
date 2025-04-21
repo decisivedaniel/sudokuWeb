@@ -30,7 +30,4 @@ jobs:
         run : npm run build-prod
 
       - name: Change name of file
-        run : cd docs/browser
-
-      - name: copy and rename 404
-        run : cp index.html 404.html
+        run : cd docs/browser && cp index.html 404.html
