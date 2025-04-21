@@ -42,13 +42,13 @@ jobs:
         run: npm run build-prod
 
       - name: Change name of file
-        run: cd docs/browser && cp index.html 404.html && cd ../../
+        run: cd docs/browser && cp index.html 404.html && cd ..
 
       - name: Upload static files as artifact 
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/
+          path: browser/
 
   deploy:
     runs-on: ubuntu-latest
