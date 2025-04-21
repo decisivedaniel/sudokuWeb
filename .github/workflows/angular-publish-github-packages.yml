@@ -27,7 +27,10 @@ jobs:
         run: npm run test-headless
 
       - name: Deploy to Github Pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run : |
-          npm run ng -- deploy --repo="https://github.com/decisivedaniel/sudokuWeb.git" --base-href=sudokuWeb --name=decisivedaniel --email=decisivedaniel@proton.me
+        run : ng build --prod --output-path docs --base-href /sudokuWeb/
+
+      - name: Change name of file
+        run : cd docs
+
+      - name: copy and rename 404
+        run : cp index.html 404.html
